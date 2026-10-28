@@ -1,0 +1,10 @@
+Flask
+numpy
+pandas
+opencv-python==4.10.0.84
+deepface
+tensorflow
+tf-keras
+Pillow
+tqdm
+gdown

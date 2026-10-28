@@ -1,0 +1,37 @@
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Generated attendance and biometric data
+captures/
+student_photos/
+embeddings.pkl
+attendance.csv
+
+# Ignore ABCD ZIP file
+ABCD.zip
+
+# Local databases
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,3 @@
+async function load(){const d=await(await fetch("/api/students")).json();document.getElementById("count").textContent=d.total;
+ document.getElementById("grid").innerHTML=d.students.map(s=>`<div class="student"><img src="${s.photo}" alt="${esc(s.name)}"><div><h3>${esc(s.name)}</h3><small>Registered Student</small></div></div>`).join("")}
+function esc(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}load();

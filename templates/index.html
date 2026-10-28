@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Face Attendance Dashboard</title><link rel="stylesheet" href="/static/css/style.css"></head>
+<body>
+<header><div class="brand">🎓 Face Attendance</div><nav><a class="active" href="/">Dashboard</a><a href="/attendance">Attendance</a><a href="/students">Students</a></nav></header>
+<main>
+<section class="hero"><div><small>AI ATTENDANCE SYSTEM</small><h1>Face Recognition Dashboard</h1><p>DeepFace + FaceNet512 + RetinaFace</p></div><a class="btn" href="/attendance">Attendance</a></section>
+<section class="stats"><div><span>Total Students</span><b id="total">-</b></div><div><span>Present</span><b id="present">-</b></div><div><span>Absent</span><b id="absent">-</b></div><div><span>Attendance</span><b id="percent">-</b></div></section>
+<section class="grid"><div class="panel"><div class="panelhead"><div><h2>Live Recognition</h2><p>Keep your face visible for 30 seconds.</p></div><span id="camstatus">Camera Off</span></div>
+<div class="camera"><video id="camera" autoplay playsinline></video><div id="msg">Camera is not started</div></div>
+<div class="buttons"><button id="start" class="btn">Start Camera</button><button id="stop" class="btn light">Stop Camera</button></div>
+<div id="result" class="result">Waiting for recognition...</div></div>
+<div class="panel"><div class="panelhead"><h2>Recent Attendance</h2><a href="/attendance">View all →</a></div><div id="recent">Loading...</div></div></section>
+</main><script src="/static/js/script.js"></script></body></html>

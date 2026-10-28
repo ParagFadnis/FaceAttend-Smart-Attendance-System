@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Attendance Register — design tokens
+   Concept: a digital ledger for face-recognition attendance. Slab serif for
+   record headings (the "register" voice), a grotesk sans for interface
+   chrome, and mono for anything that is data — IDs, timestamps, confidence
+   scores. One bold accent (verified-scan teal) reserved for the live camera
+   panel; everything else stays quiet, flat, and ruled like a ledger page.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  /* color */
+  --ink:#12181f;
+  --ink-soft:#5c6672;
+  --paper:#f6f4ee;
+  --surface:#ffffff;
+  --line:#e2ddd0;
+  --line-strong:#cfc8b5;
+  --accent:#1f6f5c;
+  --accent-ink:#0f4238;
+  --accent-soft:#e2efe9;
+  --present-bg:#e6f4ea;
+  --present-fg:#1b6b3d;
+  --absent-bg:#faeaea;
+  --absent-fg:#a4342f;
+
+  /* type */
+  --font-display:'Zilla Slab', Georgia, serif;
+  --font-body:'IBM Plex Sans', Arial, sans-serif;
+  --font-mono:'IBM Plex Mono', Menlo, monospace;
+
+  /* shape */
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:18px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+::selection{background:var(--accent-soft);color:var(--accent-ink)}
+
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+/* ---------- header ---------- */
+header{
+  height:76px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.brand{
+  font-family:var(--font-display);
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:.2px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand::before{
+  content:"";
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 4px var(--accent-soft);
+}
+
+nav{display:flex;gap:4px}
+nav a{
+  padding:9px 14px;
+  border-radius:var(--radius-sm);
+  text-decoration:none;
+  color:var(--ink-soft);
+  font-weight:600;
+  font-size:14.5px;
+  transition:color .15s ease, background .15s ease;
+}
+nav a.active,nav a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* ---------- layout ---------- */
+main{width:min(1200px,92%);margin:auto;padding:44px 0 76px}
+
+.hero,.title{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:30px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--line);
+  gap:24px;
+}
+.hero small,.title small{
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:13px;
+  letter-spacing:.3px;
+}
+.hero h1,.title h1{
+  font-family:var(--font-display);
+  font-size:38px;
+  font-weight:600;
+  margin:6px 0;
+  line-height:1.15;
+}
+.hero p,.title p{color:var(--ink-soft);margin:0;max-width:46ch}
+
+/* ---------- buttons ---------- */
+.btn,button{
+  border:0;
+  border-radius:var(--radius-sm);
+  padding:11px 18px;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:14.5px;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  transition:background .15s ease, transform .05s ease;
+}
+.btn:hover,button:hover{background:var(--accent-ink)}
+.btn:active,button:active{transform:translateY(1px)}
+.btn.light,button{background:var(--surface);color:var(--ink);border:1px solid var(--line-strong)}
+.btn.light:hover,button:hover{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.btn:not(.light){background:var(--accent);color:#fff;border:0}
+.btn:not(.light):hover{background:var(--accent-ink)}
+
+/* ---------- stat strip ---------- */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  margin-bottom:26px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+}
+.stats>div{
+  background:var(--surface);
+  padding:22px 24px;
+  box-shadow:none;
+  border:0;
+  border-radius:0;
+}
+.stats span{
+  color:var(--ink-soft);
+  font-size:13px;
+  font-weight:600;
+}
+.stats b{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:30px;
+  font-weight:600;
+  margin-top:8px;
+  color:var(--ink);
+}
+
+/* ---------- panels ---------- */
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:22px}
+.panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  box-shadow:none;
+  padding:26px;
+}
+.panelhead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.panelhead h2{
+  margin:0 0 4px;
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:600;
+}
+.panelhead p{margin:0;color:var(--ink-soft);font-size:14px}
+.panelhead a{color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:14px}
+.panelhead a:hover{text-decoration:underline}
+
+/* ---------- camera / scan panel (the one bold moment) ---------- */
+.camera{
+  height:420px;
+  background:
+    linear-gradient(rgba(18,24,31,.94),rgba(18,24,31,.94)),
+    repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(255,255,255,.035) 28px),
+    repeating-linear-gradient(90deg,transparent,transparent 27px,rgba(255,255,255,.035) 28px);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.camera::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(120,220,190,.35);
+  border-radius:12px;
+  pointer-events:none;
+}
+.camera::after{
+  content:"SCANNING";
+  position:absolute;
+  top:18px;
+  left:18px;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:1.5px;
+  color:#7fe0c2;
+  background:rgba(18,24,31,.6);
+  padding:5px 9px;
+  border-radius:6px;
+  border:1px solid rgba(127,224,194,.35);
+}
+.camera video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+#msg{
+  position:absolute;
+  color:#c9d0d8;
+  font-family:var(--font-mono);
+  font-size:13.5px;
+  opacity:.85;
+}
+
+.buttons{display:flex;gap:10px;margin-top:18px}
+
+.result{
+  margin-top:18px;
+  padding:18px;
+  border-radius:var(--radius-md);
+  background:var(--accent-soft);
+  border:1px solid #cfe4db;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.result small{color:var(--accent-ink);font-family:var(--font-mono);font-size:12.5px}
+
+/* ---------- recent activity list ---------- */
+.recent{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 4px;
+  background:transparent;
+  border-radius:0;
+  border-bottom:1px solid var(--line);
+  margin-bottom:0;
+}
+.recent:last-child{border-bottom:0}
+.recent small{display:block;color:var(--ink-soft);margin-top:3px;font-family:var(--font-mono);font-size:12.5px}
+
+.present{
+  background:var(--present-bg);
+  color:var(--present-fg);
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+.status.absent{
+  background:var(--absent-bg);
+  color:var(--absent-fg);
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ---------- toolbar / table ---------- */
+.toolbar{display:flex;gap:10px;margin-bottom:20px}
+input,select{
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-sm);
+  padding:11px 13px;
+  font-size:14px;
+  font-family:var(--font-body);
+  background:var(--surface);
+  color:var(--ink);
+}
+input{flex:1}
+input:focus,select:focus{border-color:var(--accent)}
+
+.count{
+  display:inline-block;
+  padding:14px 20px;
+  margin-bottom:22px;
+  font-family:var(--font-mono);
+  font-size:14px;
+  color:var(--ink-soft);
+  box-shadow:none;
+}
+.count b{color:var(--ink);font-size:16px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-md)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{
+  font-family:var(--font-mono);
+  font-size:11.5px;
+  letter-spacing:.5px;
+  color:var(--ink-soft);
+  background:var(--paper);
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#faf9f5}
+td.mono,td[data-type="id"],td[data-type="time"]{font-family:var(--font-mono);font-size:13.5px}
+
+/* ---------- student roster ---------- */
+.students{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.student{
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  box-shadow:none;
+  transition:border-color .15s ease;
+}
+.student:hover{border-color:var(--line-strong)}
+.student img{width:100%;height:220px;object-fit:cover;background:var(--paper);display:block}
+.student div{padding:16px}
+.student h3{margin:0 0 4px;font-family:var(--font-display);font-size:17px;font-weight:600}
+.student small{color:var(--ink-soft);font-family:var(--font-mono);font-size:12.5px}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .students{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .hero,.title{flex-direction:column;align-items:flex-start}
+  .stats,.students{grid-template-columns:1fr}
+  .camera{height:300px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition:none !important}
+}
